@@ -5,7 +5,6 @@
 #include "ebc/EbcError.h"
 #include "ebc/EmbeddedFile.h"
 #include "ebc/EmbeddedFileFactory.h"
-
 #include "ebc/util/Bitcode.h"
 #include "ebc/util/UUID.h"
 #include "ebc/util/Xar.h"
@@ -92,6 +91,9 @@ std::vector<std::unique_ptr<EmbeddedFile>> BitcodeArchive::GetEmbeddedFiles() co
     // Add swift commands.
     auto swiftCommands = _metadata->GetSwiftCommands(path);
     embeddedFile->SetCommands(swiftCommands, EmbeddedFile::CommandSource::Swift);
+
+    // Add xml name
+    embeddedFile->SetXMLName(path);
 
     // Add to list of bitcode files.
     embeddedFiles.push_back(std::move(embeddedFile));

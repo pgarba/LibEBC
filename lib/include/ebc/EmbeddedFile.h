@@ -24,6 +24,8 @@ class EmbeddedFile {
   virtual ~EmbeddedFile() = default;
 
   std::string GetName() const;
+  std::string GetXMLName() const;
+  void SetXMLName(std::string name);
 
   /// Get all commands passed to the compiler to create this embedded file.
   ///
@@ -48,6 +50,7 @@ class EmbeddedFile {
 
  private:
   std::string _name;
+  std::string _xml_name;
   Type _type;
   std::vector<std::string> _commands;
   CommandSource _commandSource;
@@ -56,4 +59,4 @@ class EmbeddedFile {
 inline bool operator==(const EmbeddedFile& lhs, const EmbeddedFile& rhs) {
   return lhs.GetName() == rhs.GetName();
 }
-}
+}  // namespace ebc

@@ -12,6 +12,13 @@ std::string EmbeddedFile::GetName() const {
   return _name;
 }
 
+std::string EmbeddedFile::GetXMLName() const {
+  return this->_xml_name;
+}
+void EmbeddedFile::SetXMLName(std::string name) {
+  this->_xml_name = name;
+}
+
 const std::vector<std::string>& EmbeddedFile::GetCommands() const {
   return _commands;
 }
