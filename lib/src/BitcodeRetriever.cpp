@@ -247,8 +247,7 @@ class BitcodeRetriever::Impl {
   ///
   /// @return A pair with the data and the size of the data.
   static std::pair<const char *, std::size_t> GetSectionData(const llvm::object::SectionRef &section) {
-    StringRef bytesStr;
-    section.getContents(bytesStr);
+    auto bytesStr = section.getContents().get();
     const char *sect = reinterpret_cast<const char *>(bytesStr.data());
     return {sect, bytesStr.size()};
   }
@@ -281,8 +280,7 @@ class BitcodeRetriever::Impl {
     std::vector<std::string> commands;
 
     for (auto it = begin; it != end; ++it) {
-      StringRef sectName;
-      it->getName(sectName);
+      auto sectName = it->getName().get();
 
       if (sectName == ".llvmbc" || sectName == "__bitcode") {
         assert(!bitcodeContainer && "Multiple bitcode sections!");
